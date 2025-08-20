@@ -4,33 +4,33 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-a_@uap(k-62s0f26$(y0(8(li@x&kpcm!1$uibv7gw21qfmq&d'
 
-DEBUG = True  # на локальной машине должно быть True
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']  # разрешаем все хосты для локальной разработки
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
-    'jazzmin',  # можно убрать, если не используешь
-    'django.contrib.admin',        # обязательно для админки
-    'django.contrib.auth',         # обязательно
-    'django.contrib.contenttypes', # обязательно
-    'django.contrib.sessions',     # обязательно
-    'django.contrib.messages',     # обязательно
-    'django.contrib.staticfiles',  # обязательно
+    'jazzmin',
+    'django.contrib.admin',        #
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 
     'rest_framework',
     'django_filters',
 
-    'apps.settings',               # твое приложение
+    'apps.settings',
 ]
 
 # Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',  # обязательно перед auth
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',  # после sessions
-    'django.contrib.messages.middleware.MessageMiddleware',    # после auth
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -38,7 +38,7 @@ ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',  # обязательно
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
