@@ -6,7 +6,6 @@ class AuthorSerializer(serializers.ModelSerializer):
         model = Author
         fields = "__all__"
 
-
 class BookSerializer(serializers.ModelSerializer):
     author = AuthorSerializer(read_only=True)
     author_id = serializers.PrimaryKeyRelatedField(

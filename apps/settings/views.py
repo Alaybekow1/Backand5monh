@@ -5,7 +5,6 @@ from .serializers import BookSerializer, AuthorSerializer
 import redis
 import json
 
-# Настройка Redis (локально)
 r = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
 
 class BookViewSet(viewsets.ModelViewSet):
@@ -22,11 +21,9 @@ class BookViewSet(viewsets.ModelViewSet):
         except Author.DoesNotExist:
             return Response({"error": "Author not found"}, status=status.HTTP_404_NOT_FOUND)
 
-        # Сохраняем автора в Redis
         author_data = {"id": author.id, "name": author.name, "birth_year": author.birth_year}
         r.set(f"author:{author.id}", json.dumps(author_data))
 
-        # Создаём книгу
         book = Book.objects.create(
             title=request.data.get('title'),
             release_date=request.data.get('release_date'),
@@ -34,3 +31,8 @@ class BookViewSet(viewsets.ModelViewSet):
         )
         serializer = self.get_serializer(book)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class AuthorViewSet(viewsets.ModelViewSet):
+    queryset = Author.objects.all()
+    serializer_class = AuthorSerializer
