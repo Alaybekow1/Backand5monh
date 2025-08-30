@@ -1,11 +1,17 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+from datetime import date
+
 
 class Author(models.Model):
     name = models.CharField(max_length=155, verbose_name="Автор")
-    birth_year = models.IntegerField(verbose_name="Год рождения")  # только год
+    birth_year = models.PositiveSmallIntegerField(
+        verbose_name="Год рождения",
+        validators=[MinValueValidator(1000), MaxValueValidator(date.today().year)]
+    )
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({self.birth_year})"
 
     class Meta:
         verbose_name = "Автор"
@@ -23,8 +29,10 @@ class Book(models.Model):
     release_date = models.DateField(verbose_name="Дата выхода")
 
     def __str__(self):
-        return f"{self.title} - {self.author.name}"
+        return f"{self.title} ({self.release_date.year}) - {self.author.name}"
 
     class Meta:
         verbose_name = "Книга"
         verbose_name_plural = "Книги"
+
+
