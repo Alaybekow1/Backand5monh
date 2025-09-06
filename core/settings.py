@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'apps.settings',
+    'apps.users',
 ]
 
 
@@ -39,7 +40,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],  # 👈 HTML-шаблоны
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -62,9 +63,12 @@ DATABASES = {
 }
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 CACHES = {
@@ -73,6 +77,7 @@ CACHES = {
         'LOCATION': 'redis://127.0.0.1:6379',
     }
 }
+
 
 
 REST_FRAMEWORK = {
@@ -84,7 +89,35 @@ REST_FRAMEWORK = {
 }
 
 
+
 LANGUAGE_CODE = 'ru-ru'
 TIME_ZONE = 'Asia/Bishkek'
 USE_I18N = True
 USE_TZ = True
+
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "📚 Моя Админка",
+    "site_header": "Админ-панель",
+    "site_brand": "Library Admin",
+    "welcome_sign": "Добро пожаловать в админку!",
+    "copyright": "My Project © 2025",
+
+    # Иконки для моделей
+    "icons": {
+        "apps.settings.Book": "fas fa-book",   # иконка книги
+    },
+
+
+    "theme": "cyborg",
+}
+
+
+
+
+
+AUTH_USER_MODEL = 'users.User'
+
+
+
